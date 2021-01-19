@@ -1,0 +1,137 @@
+:root {
+    --translucent-dark-gray: #707070d7;
+    --translucent-dark-gray-hover :#a8a8a8d7;
+}
+
+.App {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    /*background-color: #eee;*/
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar {
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav-link {
+    margin-right: 3rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--translucent-dark-gray);
+    color: white;
+    text-decoration: none;
+}
+
+.search-bar-form {
+    position: relative;
+    right: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 2rem;
+    padding: 0;
+}
+
+.search-bar-form input {
+    height: inherit;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    border: none;
+    font-size: 1.5rem;
+    outline: none;
+}
+
+.search-bar-form button:hover {
+    cursor: pointer;
+    background-color: #afafaf;
+}
+
+.search-bar-form button {
+    height: 3rem;
+    width: 3rem;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+.search-bar button img {
+    height: inherit;
+    width: inherit;
+}
+
+.top {
+    width: 100vw;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-today-box {
+    width: 70vw;
+    margin: 5rem;
+    background-color: var(--translucent-dark-gray);
+    border-radius: 0.5rem;
+}
+
+.weather-today-info-box {
+    display: flex;
+}
+
+.info-box {
+    display: inline-block;
+    text-align: center;
+    height: 10rem;
+    padding: 1rem;
+    width: auto;
+}
+
+.info-box:hover {
+    background-color: var(--translucent-dark-gray-hover);
+    cursor: pointer;
+}
+
+.bottom {}
+
+.weather-week-container {
+    background-color: var(--translucent-dark-gray);
+}
+
+.weather-week-box {
+    display: inline-block;
+    text-align: center;
+    height: inherit;
+    /*width: calc(99vw / 7);*/
+    width: 10rem;
+}
+
+.week-box:hover {
+    background-color:var(--translucent-dark-gray-hover);
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+    .weather-today-info-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .week-box {
+        display: block;
+    }
+}
