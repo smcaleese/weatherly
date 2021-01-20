@@ -5,8 +5,8 @@ import countryCodesToName from './countryCodes';
 
 /*
 TODO:
-- error handling when a wrong city is entered
-- fix mobile layout
+- run on server
+- refactor code
 */
 
 
@@ -111,11 +111,24 @@ class App extends React.Component {
 
         const backgroundImage = this.weatherIdToBackgroundImage(currentWeatherData["weather"][0].id)
 
-        const week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        const week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        const months = ["January"]
+
+        const date = new Date();
+        const currentDate = date.toLocaleDateString('default', { day: 'numeric' });
+        const currentMonth = date.toLocaleDateString('default', { month: 'long' })
+        console.log(currentDate, ",", currentMonth)
+
+        const today = new Date().getDay()
+        //const currentDate = new Date.getDate()
+        console.log("today", today)
+
         const nextWeeksWeather = this.state.weeklyWeatherData["daily"].slice(1)
+
         const weatherWeekBoxes = nextWeeksWeather.map((data, index) =>
-            <div className="weather-week-box">
-                <p>{ week[index] }</p>
+            <div className="weather-week-box center">
+                <p>{ week[(today + index + 1) % 7] }</p>
+                {console.log("week:", (today + index) % 7)}
                 <img src={`http://openweathermap.org/img/wn/${ data.weather[0].icon }@2x.png`} alt="" />
                 <p>
                     <strong>{ Math.round(data.temp.day) }°C &nbsp;</strong>
@@ -125,7 +138,7 @@ class App extends React.Component {
         )
         return (
             <div className="App" style={{ backgroundImage: `url("images/backgrounds/${backgroundImage}.jpg")` }}>
-                <section className="top">
+                <section className="top center">
                     <nav className="navbar">
                         <form className="search-bar-form">
                             <input value={this.state.searchInput}
@@ -135,32 +148,34 @@ class App extends React.Component {
                             </button>
                         </form>
                     </nav>
-                    <div className="weather-today-box center">
-                        <h1>{this.state.currCity}, {countryCodesToName[this.state.country]} </h1>
-                        <h3 id="current-day"></h3>
-                        <div className="weather-today-info-box">
-                            <div className="info-box center">
-                                <h2 id="current-temperature">{currentTemperature}°C</h2>
-                                <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} id="current-weather-icon" alt="" />
-                            </div>
-                            <div className="info-box center">
-                                <h2>wind</h2>
-                                <p id="current-wind">{currentWind} km/h</p>
-                            </div>
-                            <div className="info-box center">
-                                <h2>description</h2>
-                                <p id="current-precipitation">{currentWeatherData["weather"][0].description}</p>
-                            </div>
-                            <div className="info-box center">
-                                <h2>humidity</h2>
-                                <p id="current-wind">{currentHumidity}%</p>
+                </section>
+                <section className="bottom">
+                    <div className="left">
+                        <div className="weather-today-box center">
+                            <h1>{this.state.currCity}, {countryCodesToName[this.state.country]}</h1>
+                            <h3 id="current-day">{week[today]}, {currentDate} {currentMonth}</h3>
+                            <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} id="current-weather-icon" alt="" />
+                            <h2 id="current-temperature">{currentTemperature}°C</h2>
+                            <div className="weather-today-info-box">
+                                <div className="info-box center">
+                                    <h2>wind</h2>
+                                    <p id="current-wind">{currentWind} km/h</p>
+                                </div>
+                                <div className="info-box center">
+                                    <h2>description</h2>
+                                    <p id="current-precipitation">{currentWeatherData["weather"][0].description}</p>
+                                </div>
+                                <div className="info-box center">
+                                    <h2>humidity</h2>
+                                    <p id="current-wind">{currentHumidity}%</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </section>
-                <section className="bottom center">
-                    <div className="weather-week-container">
-                        {weatherWeekBoxes}
+                    <div className="right">
+                        <div className="weather-week-container">
+                            {weatherWeekBoxes}
+                        </div>
                     </div>
                 </section>
             </div>
