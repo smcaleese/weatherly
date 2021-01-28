@@ -3,12 +3,6 @@ import React from 'react';
 import axios from 'axios';
 import countryCodesToName from './countryCodes';
 
-/*
-TODO:
-- change logo
-- refactor code
-*/
-
 class App extends React.Component {
     constructor(props) {
         super(props)
