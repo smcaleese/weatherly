@@ -5,10 +5,9 @@ import countryCodesToName from './countryCodes';
 
 /*
 TODO:
-- run on server
+- change logo
 - refactor code
 */
-
 
 class App extends React.Component {
     constructor(props) {
